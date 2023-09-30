@@ -34,7 +34,7 @@ def run_rtl433(input_fn, protocol=None, config=None, rtl_433_cmd="rtl_433"):
 def find_json():
     """Find all reference json files recursive."""
     matches = []
-    for root, _dirnames, filenames in os.walk('tests'):
+    for root, _dirnames, filenames in os.walk('.'):
         for filename in fnmatch.filter(filenames, '*.json'):
             matches.append(os.path.join(root, filename))
     return matches
@@ -107,7 +107,7 @@ def main():
                         continue
                     expected_data.append(json.loads(json_line))
             except ValueError as _err:
-                print("ERROR: invalid json: '%s'" % output_fn)
+                print("ERROR: invalid json: '{}'. Error: {}".format(output_fn, _err))
                 continue
             expected_data = remove_fields(expected_data, ignore_fields)
 
